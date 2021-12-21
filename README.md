@@ -19,7 +19,7 @@
 
 For code references: https://github.com/LOEK-RS/globalAOA
 
-
+Geocomputation with R: https://geocompr.robinlovelace.net/spatial-class.html
 
 
 
