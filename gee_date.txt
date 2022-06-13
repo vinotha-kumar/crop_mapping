@@ -1,0 +1,21 @@
+var samples = ee.FeatureCollection("users/sindhu13/data_15000")
+
+var aoi = ee.FeatureCollection("users/sindhu13/data_15000").geometry().bounds();
+
+
+var collection = ee.ImageCollection('COPERNICUS/S2_SR')
+    .filterBounds(aoi) 
+    .filterDate('2018-01-01', '2018-12-20')
+    .select('B2', 'B3', 'B4', 'B8','SCL')
+
+
+// iterate over all images in the image collection and
+// extract the values
+var sampledPoints = collection.map(function (image) {
+  return image.sampleRegions({
+  collection: samples,
+  scale: 10});
+}).flatten();
+
+
+Export.table.toDrive(sampledPoints);
